@@ -1,4 +1,3 @@
-#COILED memory 32GiB
 #COILED disk-size 120GB
 #COILED ntasks 1 
 #COILED workspace esip-lab
