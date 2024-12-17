@@ -1,6 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+#COILED name rechunking
+#COILED disk-size 120GB
+#COILED ntasks 1
+#COILED workspace esip-lab
+#COILED software pangeo-arm
+#COILED region us-east-1
+#COILED arm True
+#COILED vm-type r7g.8xlarge
+#COILED secret-env AWS_ACCESS_KEY_ID
+#COILED secret-env AWS_SECRET_ACCESS_KEY
+
 
 if __name__ == "__main__":
 
