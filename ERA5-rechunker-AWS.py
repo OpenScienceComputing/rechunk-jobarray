@@ -23,10 +23,11 @@ if __name__ == "__main__":
 
     fs = fsspec.filesystem('s3', **storage_options)
     
-    # For c7g.8xlarge (32cpu, 64GB RAM)
+    # For r7g.8xlarge (32cpu, 256GB RAM)
     n_workers=30
-    mem = 64
-    cluster = LocalCluster(n_workers=n_workers, threads_per_worker=1)
+    mem = 256
+    cluster = LocalCluster(n_workers=n_workers, threads_per_worker=1,
+                           memory_limit=None)
     client = Client(cluster)
 
     vars = [
@@ -62,11 +63,13 @@ if __name__ == "__main__":
     nt = len(era5.time)
     nt_chunk = 24 * 360 * 4  # It's hourly data so this is number of years processed in one cycle below
     nchunks = int(np.ceil(nt / nt_chunk))
+    #max_mem = '200GB'
     max_mem = f'{mem/n_workers*0.7:.2f}GB'  
     print(f"INFO: max_mem={max_mem}")
     print("INFO: Starting with the rechunking.")
     start_time = time.time()
-    i = int(os.environ['COILED_ARRAY_TASK_ID'])
+    # task_id starts at 1, but we want to start at 0:
+    i = int(os.environ['COILED_ARRAY_TASK_ID']) - 1
     print(f"INFO: Iteration #{i}")
     i0 = i * nt_chunk
     i1 = min((i + 1) * nt_chunk, nt)
