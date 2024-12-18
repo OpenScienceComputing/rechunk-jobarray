@@ -2,7 +2,7 @@
 # coding: utf-8
 
 #COILED disk-size 120GB
-#COILED ntasks 1
+#COILED ntasks 19
 #COILED workspace esip-lab
 #COILED software pangeo-arm
 #COILED region us-west-2
@@ -77,8 +77,7 @@ if __name__ == "__main__":
     print(f"INFO: max_mem={max_mem}")
     print("INFO: Starting with the rechunking.")
     start_time = time.time()
-    # task_id starts at 1, but we want to start at 0:
-    i = int(os.environ['COILED_ARRAY_TASK_ID']) - 1
+    i = int(os.environ['COILED_ARRAY_TASK_ID']) 
     print(f"INFO: Iteration #{i}")
     i0 = i * nt_chunk
     i1 = min((i + 1) * nt_chunk, nt)
