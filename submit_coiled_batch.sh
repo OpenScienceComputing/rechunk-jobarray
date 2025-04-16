@@ -1,2 +1,2 @@
 #!/bin/bash
-coiled batch run ./ERA5-rechunker-AWS.py
+coiled batch run ./ERA5-rechunker-AWS-s3.py
